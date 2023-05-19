@@ -57,6 +57,16 @@ class Room {
     this.members.delete(member);
   }
 
+    /** Send message only to self.
+   *
+   * @param member {string to self}
+   * */
+
+    selftalk(member, data) {
+      console.log("start Room.selftalk")
+      member.send(JSON.stringify(data));
+    }
+
   /** Send message to all members in a room.
    *
    * @param data {string} message to send
