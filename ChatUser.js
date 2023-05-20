@@ -86,6 +86,20 @@ class ChatUser {
       text: joke.data.joke,
     });
   }
+  /** Handle members: broadcast to self
+   *
+   * @param text {string} message to send
+   */
+async handleMembers(text) {
+  console.log("start handleMembers");
+   console.log("this.name.room====", this.name);
+  this.room.selftalk(this, {
+    name: this.name,
+    type: "members",
+    text: Room.getMembers(this.room),
+  });
+}
+
 
   /** Handle messages from client:
    *
@@ -101,6 +115,7 @@ class ChatUser {
     let msg = JSON.parse(jsonData);
     console.log("start handleMessage");
     if (msg.text === "/joke") this.handleJoke(msg.name);
+    else if(msg.text === "/members") this.handleMembers(msg.name);
     else if (msg.type === "join") this.handleJoin(msg.name);
     else if (msg.type === "chat") this.handleChat(msg.text);
     else throw new Error(`bad message: ${msg.type}`);

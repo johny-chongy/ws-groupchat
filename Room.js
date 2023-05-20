@@ -66,6 +66,26 @@ class Room {
       console.log("start Room.selftalk")
       member.send(JSON.stringify(data));
     }
+     /** get members.
+   *
+   * @param member {string to self}
+   * */
+
+     static getMembers(room) {
+      console.log("room=====",room)
+      const members = [];
+      const memberIterator = room.members.values();
+      // console.log("memberIter====", memberIterator.room.members)
+
+      for ( let i=0; i < room.members.size; i++){
+        // console.log("memberIterator======", memberIterator.next().value)
+        members.push(memberIterator.next().value.name);
+      }
+      console.log("members====", members)
+      return members.join(", ");
+
+    }
+
 
   /** Send message to all members in a room.
    *
